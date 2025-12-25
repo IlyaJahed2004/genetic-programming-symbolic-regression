@@ -124,3 +124,23 @@ All probabilities are easy to adjust in the code.
 
 ```python
 tree = RandomTreeGeneration(max_depth=4)
+```
+
+
+## Step 4: Initial Population Generation
+
+In Genetic Programming, evolution begins with an initial population of randomly generated candidate solutions.
+
+Each candidate solution is represented as an expression tree and is generated using the random tree generation procedure with a fixed maximum depth.
+
+### Population Initialization
+
+An initial population is created by repeatedly generating random trees:
+
+- Each tree represents a different symbolic expression
+- Tree depth is limited to prevent excessive complexity
+- Randomness ensures diversity among candidate solutions
+
+This population serves as the starting point for the evolutionary process, where individuals will later be evaluated, selected, and modified through genetic operators.
+
+At this stage, no fitness evaluation or selection is applied; the goal is solely to create a diverse set of candidate expressions.

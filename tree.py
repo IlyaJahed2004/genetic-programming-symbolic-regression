@@ -95,6 +95,7 @@ def RandomTreeGeneration(max_depth):
 
 
 
+
 # tree = Node('/', [Node('x'),Node(1)])
 # print(Evaluate(tree, 2))
 # print(Evaluate(tree, 5)) 
