@@ -33,22 +33,25 @@ def Evaluate(node,x):
                     return first_val * second_val
                 case '/':
                     if second_val == 0:
-                        raise Exception("Cannot divide by zero.")
+                        return 1    #Crashing the algorithm because of a single invalid individual would stop the entire evolutionary process.
+                                    # so we return a bounded value.
                     return first_val / second_val
                 case 'pow':
                     first_element = first_val
                     second_element = second_val
                     return math.pow(first_element,second_element)
                 
-            if len(node.children1)==1:
-                first_val = Evaluate(node.children[0],x)
-                match node.value:
-                    case 'sin':
-                        return math.sin(first_val)
-                    case 'cos':
-                        return math.cos(first_val)
-                    case 'sqrt':
-                        return math.sqrt(first_val)
+        if len(node.children)==1:
+            first_val = Evaluate(node.children[0],x)
+            match node.value:
+                case 'sin':
+                    return math.sin(first_val)
+                case 'cos':
+                    return math.cos(first_val)
+                case 'sqrt':
+                    if(first_val<0):
+                        return math.sqrt(abs(first_val))
+                    return math.sqrt(first_val)
 
 
                

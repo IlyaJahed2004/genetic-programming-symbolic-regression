@@ -33,3 +33,35 @@ For terminal nodes, the evaluation returns either the input value (`x`) or the c
 For operator nodes, the function first evaluates the child subtrees and then applies the operator to the resulting values.
 
 This recursive evaluation closely follows the structure of the expression tree and forms the foundation for applying Genetic Programming operators such as crossover and mutation in later steps.
+
+
+
+## Step 2: Safe Operators and Robust Evaluation
+
+During the evolution process, Genetic Programming generates many candidate expressions.
+Some of these expressions may be mathematically invalid, such as division by zero or square roots of negative values.
+
+Crashing the algorithm because of a single invalid individual would stop the entire evolutionary process.
+Instead, invalid operations are handled using **safe operators** that return bounded values.
+
+### Safe Division
+
+When division by zero occurs, a constant value is returned instead of raising an exception:
+
+- This prevents runtime errors
+- Invalid expressions receive poor fitness naturally
+- The evolutionary process continues without interruption
+
+### Safe Square Root
+
+For square root operations, negative inputs are handled safely by applying the square root to the absolute value:
+
+- This avoids domain errors
+- Keeps evaluation stable for randomly generated expressions
+
+### Design Rationale
+
+Invalid individuals are not removed explicitly.
+Instead, they are evaluated safely and assigned poor fitness values, allowing natural selection to eliminate them over generations.
+
+This approach ensures numerical stability while preserving the exploratory nature of Genetic Programming.
