@@ -14,4 +14,4 @@ def generate_population():
        candidate_answers.append(x)
     return candidate_answers
 
-population = generate_population()
+# population = generate_population()

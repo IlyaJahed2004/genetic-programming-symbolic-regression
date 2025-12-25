@@ -191,3 +191,40 @@ x,y
 x₁,y₁
 x₂,y₂
 ...
+```
+
+
+## Fitness Evaluation
+
+This step introduces a fitness evaluation mechanism for expression trees. Each generated tree is evaluated against a sampled dataset, and its performance is quantified using a numerical error metric.
+
+---
+
+### Fitness Function
+
+The fitness of a tree is computed using **Mean Squared Error (MSE)** between the predicted outputs and the true target values
+
+
+Lower fitness values indicate better-performing trees.
+
+---
+
+### Evaluation Process
+
+For each tree in the population:
+1. The tree is evaluated for every input value `xᵢ`
+2. The predicted output `ŷᵢ` is compared to the true output `yᵢ`
+3. Squared errors are accumulated and averaged
+4. One fitness value is produced per tree
+
+---
+
+### Robustness
+
+Invalid evaluations (e.g., division by zero or non-finite outputs) are penalized to prevent unstable trees from influencing evolution.
+
+---
+
+### Output
+
+The fitness evaluation step returns a list of fitness values corresponding to the current pop
