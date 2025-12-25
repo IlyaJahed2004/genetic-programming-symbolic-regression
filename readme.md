@@ -65,3 +65,62 @@ Invalid individuals are not removed explicitly.
 Instead, they are evaluated safely and assigned poor fitness values, allowing natural selection to eliminate them over generations.
 
 This approach ensures numerical stability while preserving the exploratory nature of Genetic Programming.
+
+
+
+
+
+## Step 3: Random Expression Tree Generator
+
+A Python module for generating random mathematical expression trees with configurable probabilities and depth constraints.
+
+This is useful for:
+- Genetic Programming
+- Symbolic Regression
+- Expression Synthesis
+- Evolutionary Algorithms
+
+---
+
+## Features
+
+- Depth-limited tree generation
+- Probabilistic operator vs terminal selection
+- Probabilistic variable vs constant terminals
+- Separate unary and binary operator handling
+- Clean and extensible design
+
+---
+
+## Operator Sets
+
+### Unary Operators
+- `sin`
+- `cos`
+- `sqrt`
+
+### Binary Operators
+- `+`
+- `-`
+- `*`
+- `/`
+- `pow`
+
+---
+
+## Probability Model
+
+|      Decision      | Probability |
+|--------------------|-------------|
+Operator vs Terminal | 70%     30% |
+Unary vs Binary      | 40%     60% |
+Variable vs Constant | 70%     30% |
+
+All probabilities are easy to adjust in the code.
+
+---
+
+## Usage
+
+```python
+tree = RandomTreeGeneration(max_depth=4)
