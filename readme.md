@@ -144,3 +144,50 @@ An initial population is created by repeatedly generating random trees:
 This population serves as the starting point for the evolutionary process, where individuals will later be evaluated, selected, and modified through genetic operators.
 
 At this stage, no fitness evaluation or selection is applied; the goal is solely to create a diverse set of candidate expressions.
+
+
+
+
+## Dataset Generation
+
+This step implements a dataset generation module that samples input–output pairs from predefined mathematical functions. The generated datasets are intended for use in regression, symbolic modeling, and evolutionary computation tasks.
+
+---
+
+### Features
+
+- Generates fixed-size datasets (default: 2000 samples)
+- Supports multiple target functions
+- Applies controlled random noise
+- Enforces valid input domains
+- Exports datasets to CSV format
+
+---
+
+### Supported Functions
+
+- **f1(x)** = x² + 2x + 1  
+- **f2(x)** = 0.2x + sin(3x)  
+- **f3(x)** = x³ + log(x + 1)
+
+---
+
+### Sampling Strategy
+
+- Input values (`x`) are sampled uniformly:
+  - `[-100, 100]` for f1 and f2
+  - `[-0.9, 100]` for f3 to avoid invalid logarithmic values
+- Output values (`y`) are computed from the selected function
+- Gaussian noise is applied multiplicatively to simulate real-world data
+
+---
+
+### Data Format
+
+Datasets are stored as CSV files with the following structure:
+
+```text
+x,y
+x₁,y₁
+x₂,y₂
+...
