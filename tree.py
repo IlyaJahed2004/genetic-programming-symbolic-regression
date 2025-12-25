@@ -55,17 +55,16 @@ binary_ops = ['+', '-', '*', '/', 'pow']
 
 
 def terminal_chooser():
-    # 70% variable, 30% constant
     if random.random() < 0.7:
-        return Variables[0]
+        return Node('x')
     else:
-        return random.randint(0, 5)
+        return Node(random.randint(0, 5))
 
 
 def RandomTreeGeneration(max_depth):
     # Base case: force terminal
     if max_depth == 0:
-        return Node(terminal_chooser())
+        return terminal_chooser()
 
     max_depth -= 1
 
@@ -77,17 +76,17 @@ def RandomTreeGeneration(max_depth):
         if random.random() < 0.4:
             operator = random.choice(unary_ops)
             child = RandomTreeGeneration(max_depth)
-            return Node(operator, child)
+            return Node(operator, [child])
 
         else:
             operator = random.choice(binary_ops)
             child1 = RandomTreeGeneration(max_depth)
             child2 = RandomTreeGeneration(max_depth)
-            return Node(operator, child1, child2)
+            return Node(operator, [child1, child2])
 
     else:
         # Terminal node
-        return Node(terminal_chooser())
+        return terminal_chooser()
 
 
 
