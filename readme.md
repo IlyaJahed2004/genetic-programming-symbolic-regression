@@ -309,3 +309,46 @@ This prevents uncontrolled tree growth (bloat).
 This implementation follows standard academic Genetic Programming practices.
 
 
+
+
+## Step 10: Mutation Operator
+
+Mutation is one of the core genetic operators used to maintain diversity in the population
+and prevent premature convergence.
+
+### Overview
+
+In this project, mutation is implemented as **subtree mutation**, which is the standard
+approach in Genetic Programming.
+
+The mutation process works as follows:
+
+1. A parent tree is cloned to avoid modifying the original individual.
+2. A random node is selected from the cloned tree.
+3. A new random subtree is generated with a limited maximum depth.
+4. The selected node is replaced by the newly generated subtree.
+5. If the resulting tree exceeds the maximum allowed depth, the mutation is retried.
+6. If all retries fail, the original parent is returned unchanged.
+
+### Design Choices
+
+- **Subtree mutation** was chosen instead of regenerating entire trees to ensure
+  localized structural changes.
+- A retry limit is used to prevent infinite recursion when depth constraints cannot be satisfied.
+- All mutation operations are performed on cloned trees to preserve population integrity.
+
+### Benefits
+
+- Maintains genetic diversity
+- Prevents stagnation in local minima
+- Respects tree depth constraints
+- Safe against unintended side effects
+
+### Parameters
+
+- `MUTATION_MAX_DEPTH`: Maximum depth of the randomly generated mutation subtree
+- `tree_maxdepth`: Maximum allowed depth of the full program tree
+- `MAX_MUTATION_TRIES`: Safety limit for mutation retries
+
+This mutation strategy follows standard academic Genetic Programming practices.
+
