@@ -20,9 +20,16 @@ def fitness(population , x,y):    #x is the numpy array of the inputs,y is the c
                 break
 
             square_sum+= (y_predict-y[i])**2
+            # Overflow during accumulation
+            if math.isnan(square_sum) or math.isinf(square_sum):
+                square_sum = LARGE_PENALTY
+                valid = False
+                break
         fitness_value = square_sum
         if(valid): 
             fitness_value = square_sum/len(x)  # this is the mse which is our fitness function.
+        else:
+            fitness_value = LARGE_PENALTY
         candidates_fitness.append((random_tree,fitness_value))
 
     return candidates_fitness

@@ -13,3 +13,4 @@ def tournament_selection(candidates_fitness):
             best_fitness = fitness
 
     return best_tree
+

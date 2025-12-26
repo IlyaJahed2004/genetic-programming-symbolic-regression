@@ -30,9 +30,25 @@ def Evaluate(node,x):
                                     # so we return a bounded value.
                     return first_val / second_val
                 case 'pow':
-                    first_element = first_val
-                    second_element = second_val
-                    return math.pow(first_element,second_element)
+                    base = first_val
+                    exp = second_val
+
+                    # Safe power operator
+                    # If base is negative and exponent is not integer then it is invalid
+                    if base < 0 and not float(exp).is_integer():
+                        return 1.0
+
+                    try:
+                        result = math.pow(base, exp)
+                    except (ValueError, OverflowError):
+                        return 1.0
+
+                    # Final safety check
+                    if math.isnan(result) or math.isinf(result):
+                        return 1.0
+
+                    return result
+
                 
         if len(node.children)==1:
             first_val = Evaluate(node.children[0],x)
