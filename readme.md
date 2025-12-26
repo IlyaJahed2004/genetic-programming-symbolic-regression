@@ -227,3 +227,28 @@ Invalid individuals are naturally removed during the selection process through e
 ---
 
 This design ensures numerical stability, robustness, and proper evolutionary behavior.
+
+
+
+## Step7: Parent Selection (Tournament Selection)
+
+Parent selection in this project is implemented using **deterministic tournament selection**.
+
+### How Tournament Selection Works
+
+1. A fixed number of individuals (`k`, tournament size) are randomly sampled from the population.
+2. Their fitness values are compared.
+3. The individual with the **lowest fitness (MSE)** is selected as the parent.
+
+This selection process is repeated whenever a parent is needed.  
+For crossover, tournament selection is executed twice to select two parents.
+
+### Why Tournament Selection?
+
+Tournament selection was chosen because it:
+- does not require fitness normalization,
+- is robust to large penalty values,
+- handles noisy fitness evaluations well,
+- is commonly used in Genetic Programming for symbolic regression.
+
+In this implementation, the tournament size is set to **3**, providing a balanced trade-off between exploration and exploitation.

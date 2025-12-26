@@ -5,7 +5,7 @@ import math
 LARGE_PENALTY = 1e12
 
 def fitness(population , x,y):    #x is the numpy array of the inputs,y is the corresponding numpy array of outputs.
-    fitness_gencandidates=[]
+    candidates_fitness=[]
 
     for random_tree in population:
         valid = True
@@ -23,7 +23,7 @@ def fitness(population , x,y):    #x is the numpy array of the inputs,y is the c
         fitness_value = square_sum
         if(valid): 
             fitness_value = square_sum/len(x)  # this is the mse which is our fitness function.
-        fitness_gencandidates.append((random_tree,fitness_value))
+        candidates_fitness.append((random_tree,fitness_value))
 
-    return fitness_gencandidates
+    return candidates_fitness
 
