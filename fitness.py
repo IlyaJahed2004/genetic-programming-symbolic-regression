@@ -1,17 +1,29 @@
-from datasample import sample_generator,f1,f2,f3
-from main import generate_population
 from tree import Evaluate
+import math
 
-def fitness():
-    x,y = sample_generator(f1)
-    population = generate_population()
-    fitness_rand_candidates=[]
+
+LARGE_PENALTY = 1e12
+
+def fitness(population , x,y):    #x is the numpy array of the inputs,y is the corresponding numpy array of outputs.
+    fitness_gencandidates=[]
+
     for random_tree in population:
+        valid = True
         square_sum = 0
         for i in range(len(x)):
             y_predict = Evaluate(random_tree ,x[i])
-            square_sum+=(y_predict-y[i])**2
-        fitness_rand_candidates.append(square_sum/len(x))
+            # check whether the y_prediction is very large or is nan or none:
+            # if the condition is true then we assign a bigpenalty for the fitness of that tree.
+            if (y_predict is None or math.isnan(y_predict) or math.isinf(y_predict)):
+                square_sum = LARGE_PENALTY
+                valid = False
+                break
 
-    return fitness_rand_candidates
+            square_sum+= (y_predict-y[i])**2
+        fitness_value = square_sum
+        if(valid): 
+            fitness_value = square_sum/len(x)  # this is the mse which is our fitness function.
+        fitness_gencandidates.append((random_tree,fitness_value))
+
+    return fitness_gencandidates
 
