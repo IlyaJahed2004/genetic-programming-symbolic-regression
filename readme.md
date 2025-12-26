@@ -261,3 +261,51 @@ Elitism is used to preserve the best-performing individuals in each generation o
 After fitness evaluation, individuals are ranked using Mean Squared Error (MSE). A fixed percentage (5%) of the top-performing individuals is directly copied into the next generation without any genetic modification.
 
 This strategy ensures that high-quality symbolic expressions are not lost due to stochastic effects of crossover or mutation and improves the stability of the evolutionary process.
+
+
+
+## Step9: Crossover and Tree Utilities
+
+In this stage of the project, subtree-based crossover for Genetic Programming is implemented.
+This requires several fundamental tree manipulation utilities.
+
+### Tree Cloning
+
+Before performing crossover, parent trees are cloned to avoid modifying individuals
+that may later be reused for selection or elitism.
+
+Cloning is implemented as a deep recursive copy of the tree structure.
+
+### Collecting Tree Nodes
+
+A recursive traversal function is used to collect all nodes in a tree.
+This enables random selection of crossover points while preserving node identity.
+
+### Subtree Replacement
+
+Crossover is implemented by replacing a randomly selected subtree in one parent
+with a subtree from another parent.
+
+The replacement is performed using a recursive reconstruction strategy:
+- If the current node is the selected target node, the replacement subtree is returned.
+- Otherwise, the node is rebuilt from recursively processed children.
+
+This approach avoids in-place mutation and ensures correctness.
+
+### Depth-Constrained Crossover
+
+After crossover, offspring trees are checked against a maximum depth constraint.
+If the constraint is violated, the crossover operation is retried.
+
+This prevents uncontrolled tree growth (bloat).
+
+### Key Properties
+
+- Parents are never modified
+- Subtree identity is preserved
+- Tree structure is safely reconstructed
+- Depth constraints are enforced
+
+This implementation follows standard academic Genetic Programming practices.
+
+

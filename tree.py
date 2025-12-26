@@ -107,7 +107,52 @@ def RandomTreeGeneration(max_depth):
 
 
 
+def clone(node):
+    if node.is_terminal():
+        nodevalue = node.value
+        terminal_node = Node(nodevalue,[])
+        return terminal_node 
+    clonednode_value = node.value
+    copiedchildren = []
+    cloned_node = Node(clonednode_value,copiedchildren)
+    for child in node.children:
+        childnode = clone(child)
+        copiedchildren.append(childnode)
+    return cloned_node
 
+
+
+def get_all_nodes(node):
+    nodes = [node]
+    for child in node.children:
+       nodes+=get_all_nodes(child)
+    return nodes
+
+
+def tree_depth(node):
+    if(node.is_terminal()):
+        return 1
+    
+    local_children_list=[]
+    for child in node.children:
+        local_children_list.append(tree_depth(child))
+
+    return 1 + max(local_children_list)
+
+
+
+
+def replace_subtree(current_node, target_node, replacement_subtree):
+    if(current_node is target_node):
+        return replacement_subtree
+    
+    new_children=[]
+    for child in current_node.children:
+        x = replace_subtree(child,target_node,replacement_subtree)
+        new_children.append(x)
+    return Node(current_node.value, new_children)
+
+    
 
 
 
