@@ -252,3 +252,12 @@ Tournament selection was chosen because it:
 - is commonly used in Genetic Programming for symbolic regression.
 
 In this implementation, the tournament size is set to **3**, providing a balanced trade-off between exploration and exploitation.
+
+
+## Step 8: Elitism
+
+Elitism is used to preserve the best-performing individuals in each generation of the genetic programming process.
+
+After fitness evaluation, individuals are ranked using Mean Squared Error (MSE). A fixed percentage (5%) of the top-performing individuals is directly copied into the next generation without any genetic modification.
+
+This strategy ensures that high-quality symbolic expressions are not lost due to stochastic effects of crossover or mutation and improves the stability of the evolutionary process.
