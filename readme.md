@@ -1,11 +1,74 @@
 # Genetic Programming for Symbolic Regression
 
-This project implements **symbolic regression using Genetic Programming (GP)** in Python.
-The goal is to automatically discover a mathematical expression that fits a set of input–output data, without assuming a predefined model structure.
+  This project implements Symbolic Regression using Genetic Programming (GP) in Python.
+  The goal is to automatically discover a mathematical expression that approximates a target function, without assuming a predefined model structure.
 
-This repository is developed step by step, starting from the core building blocks of Genetic Programming.
+  The project is implemented step by step, following standard academic Genetic Programming practices, with a strong focus on robustness, numerical stability, and modular design.
 
+  Project Structure
+
+  The repository is organized into logical modules to ensure clarity, scalability, and maintainability:
+
+  src/
+
+  ├── core/
+
+  │ ├── node.py # Expression tree node definition
+
+  │ └── tree.py # Tree evaluation, cloning, traversal utilities
+
+  │
+
+  ├── operators/
+
+  │ ├── fitness.py # Fitness evaluation (MSE + penalty handling)
+
+  │ ├── parentselection.py # Tournament selection
+
+  │ ├── crossover.py # Depth-constrained subtree crossover
+
+  │ └── mutation.py # Subtree mutation operator
+
+  │
+
+  ├── data/
+
+  │ ├── datasample.py # Dataset generation with noise
+
+  │ └── targetfunctions.py # Target regression functions
+
+  │
+
+  ├── visualization/
+
+  │ └── visualizer.py # Graphviz-based tree visualization
+
+  │
+  outputs/
+
+  ├── trees/
+
+  │ └── f1/ # Tree visualizations per generation
+
+  │
+
+  └── data/
+
+  │ └── data_f1.csv # Generated datasets
+
+  │
+
+
+  This modular structure:
+
+  avoids circular dependencies,
+
+  makes experimentation easier,
+
+  and reflects real research-grade code organization.
 ---
+
+
 
 ## Step 1: Expression Tree Representation
 
@@ -23,9 +86,9 @@ The expression:
 
 is represented as:   
 
-            +
-           /  \ 
-          x    3        
+          +
+        /   \ 
+       x     3        
 
 
 Expression evaluation is implemented using a recursive function.  
@@ -430,3 +493,12 @@ x = -0.565 | target = 0.173 | pred = -0.425
 
 
 The results demonstrate that the evolved symbolic expression closely approximates the target function.
+
+
+## How to Run
+
+From the project root directory, run:
+
+```bash
+python -m src.main
+```
