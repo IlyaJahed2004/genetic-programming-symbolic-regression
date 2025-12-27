@@ -1,6 +1,6 @@
 import random
 import src.core.tree as tree
-from src.data.datasample import sample_generator
+from src.data.datasample import load_dataset,generate_and_save_dataset
 import src.data.targetfunctions as targetfunctions
 from src.operators.fitness import fitness
 from src.operators.parentselection import tournament_selection
@@ -27,8 +27,11 @@ def generate_population():
 
 #  Initialization 
 population = generate_population()
-x, y = sample_generator(targetfunctions.f1, f"{DATASET_DIR}data_f1.csv")
 
+# this line will only be called once to generate the csv file:
+# x, y = generate_and_save_dataset(targetfunctions.f1, f"{DATASET_DIR}data_f1.csv")
+
+x, y = load_dataset("outputs/data/data_f1.csv")
 
 for gen in range(GENERATIONS_COUNT):
 

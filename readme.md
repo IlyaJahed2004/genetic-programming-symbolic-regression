@@ -1,11 +1,11 @@
 # Genetic Programming for Symbolic Regression
-
+---
   This project implements Symbolic Regression using Genetic Programming (GP) in Python.
   The goal is to automatically discover a mathematical expression that approximates a target function, without assuming a predefined model structure.
 
   The project is implemented step by step, following standard academic Genetic Programming practices, with a strong focus on robustness, numerical stability, and modular design.
 
-  Project Structure
+ ## Project Structure
 
   The repository is organized into logical modules to ensure clarity, scalability, and maintainability:
 
@@ -66,6 +66,7 @@
   makes experimentation easier,
 
   and reflects real research-grade code organization.
+
 ---
 
 

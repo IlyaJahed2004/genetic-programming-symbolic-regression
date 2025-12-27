@@ -7,34 +7,36 @@ import math
 num_samples = 2000
 
 
-def sample_generator(func,filename_tosave):
-    x_values = np.zeros(num_samples)
-    y_values = np.zeros(num_samples)
+# datasample.py
+import numpy as np
+
+def generate_and_save_dataset(func, filename, num_samples=2000):
+    x = np.zeros(num_samples)
+    y = np.zeros(num_samples)
 
     for i in range(num_samples):
-        # Safe domain for f3
-        if func == targetfunctions.f3:
-            x = np.random.uniform(0, 100)
-        elif(func == targetfunctions.f1 or func == targetfunctions.f2):
-            x = np.random.uniform(-100, 100)
+        if func.__name__ == "f3":
+            xi = np.random.uniform(0, 100)
+        else:
+            xi = np.random.uniform(-100, 100)
 
-        y_clean = func(x)
-        noise = np.random.uniform(-0.10, 0.10)  #noise rate is between 0 to 10 percent.
-        y = y_clean * (1 + noise)
+        yi_clean = func(xi)
+        noise = np.random.uniform(-0.10, 0.10)
+        yi = yi_clean * (1 + noise)
 
-        x_values[i] = x
-        y_values[i] = y
-    # only used to generate random samples and save them on csv
-    data = np.column_stack((x_values, y_values))
-    np.savetxt(
-        filename_tosave,
-        data,
-        delimiter=",",
-        header="x,y",
-        comments=""
-    )
+        x[i] = xi
+        y[i] = yi
 
-    return x_values, y_values
+    data = np.column_stack((x, y))
+    np.savetxt(filename, data, delimiter=",", header="x,y", comments="")
+
+
+
+def load_dataset(filename):
+    data = np.loadtxt(filename, delimiter=",", skiprows=1)
+    return data[:, 0], data[:, 1]
+
+
 
 
 
