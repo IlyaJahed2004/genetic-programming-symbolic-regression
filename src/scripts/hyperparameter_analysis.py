@@ -4,7 +4,7 @@ from src.data.datasample import load_dataset
 
 x, y = load_dataset("outputs/data/data_f1.csv")
 
-POPULATION_SIZES = [20, 50, 100]
+POPULATION_SIZES = [20,50,100]
 RUNS = 5
 GENERATIONS = 50
 
@@ -20,9 +20,10 @@ for pop_size in POPULATION_SIZES:
 
     results[pop_size] = {
         "mean": np.mean(mses),
+        "median": np.median(mses),
         "std": np.std(mses),
         "best": np.min(mses)
     }
 
 for k, v in results.items():
-    print(f"Pop={k} | mean={v['mean']:.4f} | std={v['std']:.4f} | best={v['best']:.4f}")
+    print(f"Pop={k} | mean={v['mean']:.4f}|median={v['median']:.4f} | std={v['std']:.4f} | best={v['best']:.4f}")

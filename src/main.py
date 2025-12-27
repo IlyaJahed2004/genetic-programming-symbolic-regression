@@ -4,8 +4,8 @@ from src.data.datasample import load_dataset
 from src.gp_runner import run_gp
 from src.core.tree import Evaluate
 
-DATASET_PATH = "outputs/data/data_f3.csv"
-VIS_DIR = "outputs/trees/f3"
+DATASET_PATH = "outputs/data/data_f1.csv"
+VIS_DIR = "outputs/trees/f1"
 
 # this line will only be called once to generate the csv file:
 # x, y = generate_and_save_dataset(targetfunctions.f1, f"{DATASET_DIR}data_f1.csv")

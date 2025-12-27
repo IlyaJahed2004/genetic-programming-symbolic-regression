@@ -54,8 +54,12 @@ def Evaluate(node,x):
             first_val = Evaluate(node.children[0],x)
             match node.value:
                 case 'sin':
+                    if first_val is None or math.isnan(first_val) or math.isinf(first_val):
+                        return 1.0
                     return math.sin(first_val)
                 case 'cos':
+                    if first_val is None or math.isnan(first_val) or math.isinf(first_val):
+                        return 1.0
                     return math.cos(first_val)
                 case 'sqrt':
                     if(first_val<0):
