@@ -352,3 +352,81 @@ The mutation process works as follows:
 
 This mutation strategy follows standard academic Genetic Programming practices.
 
+
+
+ 
+## Step11: Main Evolutionary Loop
+
+This project implements a complete **Genetic Programming (GP)** pipeline for symbolic regression.  
+The evolutionary process iteratively improves a population of expression trees to approximate a target function.
+
+### Evolutionary Steps per Generation
+
+Each generation follows these steps:
+
+1. **Fitness Evaluation**
+   - Every individual (expression tree) is evaluated using Mean Squared Error (MSE).
+   - Invalid evaluations (NaN, Inf, overflow, domain errors) are penalized with a large fitness value.
+
+2. **Elitism**
+   - A fixed percentage (5%) of the best individuals is directly copied to the next generation.
+   - This guarantees that high-quality solutions are never lost.
+
+3. **Parent Selection**
+   - Tournament selection is used.
+   - Random subsets of individuals compete, and the one with the lowest fitness is selected.
+
+4. **Crossover**
+   - Two parents are cloned.
+   - Random nodes are selected from each tree.
+   - Subtrees are swapped using a recursive subtree replacement.
+   - A maximum number of attempts is enforced to avoid infinite recursion.
+   - Offspring exceeding the maximum depth are discarded.
+
+5. **Mutation**
+   - A random node in the tree is replaced with a newly generated random subtree.
+   - Mutation depth is strictly bounded to control bloat.
+
+6. **Population Update**
+   - New individuals are added until the population size is restored.
+   - The process repeats for a fixed number of generations.
+
+---
+
+## Robustness and Safety Mechanisms
+
+Several safeguards were implemented to ensure stability:
+
+- **Safe operators** (division, power, sqrt) prevent runtime crashes.
+- **Fitness penalties** handle invalid numerical results.
+- **Depth constraints** prevent uncontrolled tree growth.
+- **Crossover retry limits** eliminate infinite recursion risks.
+- **Tree cloning** ensures parents are never modified in-place.
+
+---
+
+## Visualization
+
+At each generation:
+- The **best individual** is visualized as a tree using Graphviz.
+- Visualization helps track structural evolution and detect bloat or degeneration.
+
+---
+
+## Final Evaluation
+
+After the final generation:
+- The best evolved individual is evaluated on sample inputs.
+- Predictions are compared with the true target function values.
+- This provides a qualitative and quantitative assessment of approximation accuracy.
+
+Example output:
+
+x = -70.142 | target = 5119.425 | pred = 4920.609
+
+x = 93.657 | target = 8815.183 | pred = 8771.347
+
+x = -0.565 | target = 0.173 | pred = -0.425
+
+
+The results demonstrate that the evolved symbolic expression closely approximates the target function.
