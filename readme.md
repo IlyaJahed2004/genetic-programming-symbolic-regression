@@ -91,6 +91,99 @@ is represented as:
         /   \ 
        x     3        
 
+# Genetic Programming for Symbolic Regression
+---
+  This project implements Symbolic Regression using Genetic Programming (GP) in Python.
+  The goal is to automatically discover a mathematical expression that approximates a target function, without assuming a predefined model structure.
+
+  The project is implemented step by step, following standard academic Genetic Programming practices, with a strong focus on robustness, numerical stability, and modular design.
+
+ ## Project Structure
+
+  The repository is organized into logical modules to ensure clarity, scalability, and maintainability:
+
+  src/
+
+  ├── core/
+
+  │ ├── node.py # Expression tree node definition
+
+  │ └── tree.py # Tree evaluation, cloning, traversal utilities
+
+  │
+
+  ├── operators/
+
+  │ ├── fitness.py # Fitness evaluation (MSE + penalty handling)
+
+  │ ├── parentselection.py # Tournament selection
+
+  │ ├── crossover.py # Depth-constrained subtree crossover
+
+  │ └── mutation.py # Subtree mutation operator
+
+  │
+
+  ├── data/
+
+  │ ├── datasample.py # Dataset generation with noise
+
+  │ └── targetfunctions.py # Target regression functions
+
+  │
+
+  ├── visualization/
+
+  │ └── visualizer.py # Graphviz-based tree visualization
+
+  │
+  outputs/
+
+  ├── trees/
+
+  │ └── f1/ # Tree visualizations per generation
+
+  │
+
+  └── data/
+
+  │ └── data_f1.csv # Generated datasets
+
+  │
+
+
+  This modular structure:
+
+  avoids circular dependencies,
+
+  makes experimentation easier,
+
+  and reflects real research-grade code organization.
+
+---
+
+
+
+## Step 1: Expression Tree Representation
+
+In Genetic Programming, each candidate solution (chromosome) is represented as an **expression tree**:
+
+- **Internal nodes** represent operators (e.g. `+`, `-`, `*`, `/`)
+- **Leaf nodes** represent terminals:
+  - the input variable `x`
+  - numeric constants
+
+### Example Tree
+
+The expression:
+ x + 3
+
+is represented as:   
+
+          +
+        /   \ 
+       x     3        
+
 
 Expression evaluation is implemented using a recursive function.  
 For terminal nodes, the evaluation returns either the input value (`x`) or the constant stored in the node.  
@@ -502,4 +595,10 @@ From the project root directory, run:
 
 ```bash
 python -m src.main
+```
+
+  update this readm eand give me the final readme.actually for running the file hyperparameter_analysis file i should run this command:python -m src.scripts.hyperparameter_analysis  and what i mean by hyperparameter tuning is this:
+
+```bash
+python -m src.scripts.hyperparameter_analysis
 ```
