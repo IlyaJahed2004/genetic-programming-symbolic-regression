@@ -11,7 +11,7 @@ from src.core.tree import Evaluate
 
 # Runs a Genetic Programming symbolic regression experiment.
 # Returns: best_tree, best_fitness
-def run_gp(x,y,population_size=20,max_depth=7,generations=50,crossover_rate=0.8,elitism_rate=0.05,visualize=False,vis_dir=None):
+def run_gp(x,y,population_size=20,max_depth=7,generations=50,crossover_rate=0.8,elitism_rate=0.05,visualize=False,vis_dir=None,log=None):
 
     # Initialization
     population = []
@@ -26,8 +26,8 @@ def run_gp(x,y,population_size=20,max_depth=7,generations=50,crossover_rate=0.8,
         fitness_stats.sort(key=lambda t: t[1])  # lower MSE is better
 
         best_tree, best_fitness = fitness_stats[0]
-
-        print(f"Generation {gen} | Best MSE: {best_fitness:.6f}")
+        if log:
+            print(f"Generation {gen} | Best MSE: {best_fitness:.6f}")
 
         # Optional visualization(only visualize when its flag is on.)
         if visualize and vis_dir is not None:

@@ -12,7 +12,7 @@ VIS_DIR = "outputs/trees/f3"
 
 x, y = load_dataset(DATASET_PATH)
 
-best_tree, best_fitness = run_gp(x,y,population_size=20,max_depth=7,generations=50,visualize=True,vis_dir=VIS_DIR)
+best_tree, best_fitness = run_gp(x,y,population_size=20,max_depth=7,generations=50,visualize=True,vis_dir=VIS_DIR,log = True)
 
 print("\n========== FINAL RESULT ==========")
 print(f"Final Best MSE: {best_fitness:.6f}")
